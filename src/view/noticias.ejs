@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>MVC Exemplo Node.JS</title>
+    <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div>
+        <br /><br /><br />
+        <h2>MVC Exemplo Node.JS</h2>
+        <br />
+        <% if (noticias.length) { %>
+            <div class="container">
+                <% for(var i=0; i < noticias.length; i++) {%>
+                    <div>
+                        <h4>
+                            <%= noticias[i].id %>
+                        </h4>
+                        <h4>
+                            <%= noticias[i].titulo %>
+                        </h4>
+                        <p>
+                            <%= noticias[i].noticia %>
+                        </p>
+                    </div>
+                    <% } %>
+            </div>
+            <% } else { %>
+                <p>Nenhuma notícia encontrada.</p>
+                <% } %>
+    </div>
+</body>
+
+</html>
