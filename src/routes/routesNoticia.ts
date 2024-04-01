@@ -1,16 +1,26 @@
-import express, { Request, Response } from "express";
+import express, { Request, Response, Router } from "express";
 import NoticiasController from "../controller/controller";
 
-const router = express.Router();
-const noticiasController = new NoticiasController();
+class NoticiasRouter {
+    public router: Router;
+    private noticiasController: NoticiasController;
 
-router.get("/", async (req: Request, res: Response) => {
-    try {
-        await noticiasController.getNoticias(req, res);
-    } catch (error) {
-        console.error("Erro ao obter as notícias:", error);
-        res.status(500).send("Erro interno do servidor");
+    constructor() {
+        this.router = express.Router();
+        this.noticiasController = new NoticiasController();
+        this.initializeRoutes();
     }
-});
 
-export default router;
+    private initializeRoutes() {
+        this.router.get("/", async (req: Request, res: Response) => {
+            try {
+                await this.noticiasController.getNoticias(req, res);
+            } catch (error) {
+                console.error("Erro ao obter as notícias:", error);
+                res.status(500).send("Erro interno do servidor");
+            }
+        });
+    }
+}
+
+export default new NoticiasRouter().router;

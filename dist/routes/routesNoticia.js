@@ -14,15 +14,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const controller_1 = __importDefault(require("../controller/controller"));
-const router = express_1.default.Router();
-const noticiasController = new controller_1.default();
-router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        yield noticiasController.getNoticias(req, res);
+class NoticiasRouter {
+    constructor() {
+        this.router = express_1.default.Router();
+        this.noticiasController = new controller_1.default();
+        this.initializeRoutes();
     }
-    catch (error) {
-        console.error("Erro ao obter as notícias:", error);
-        res.status(500).send("Erro interno do servidor");
+    initializeRoutes() {
+        this.router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield this.noticiasController.getNoticias(req, res);
+            }
+            catch (error) {
+                console.error("Erro ao obter as notícias:", error);
+                res.status(500).send("Erro interno do servidor");
+            }
+        }));
     }
-}));
-exports.default = router;
+}
+exports.default = new NoticiasRouter().router;

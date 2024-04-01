@@ -21,8 +21,7 @@ class NoticiasController {
                 const noticiasRaw = yield fs_1.default.promises.readFile(path_1.default.join(__dirname, "../../src/data/noticias.json"), "utf8");
                 console.log(noticiasRaw);
                 const noticiasObj = JSON.parse(noticiasRaw);
-                const noticias = noticiasObj.noticias; // Ajuste aqui
-                // Verifique se noticias é um array antes de renderizar
+                const noticias = noticiasObj.noticias;
                 if (Array.isArray(noticias)) {
                     res.render("noticias", { noticias });
                 }
