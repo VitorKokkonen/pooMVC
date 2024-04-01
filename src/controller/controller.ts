@@ -10,8 +10,15 @@ class NoticiasController {
             const noticiasRaw = await fs.promises.readFile(path.join(__dirname, "../../src/data/noticias.json"), "utf8");
             console.log(noticiasRaw);
 
-            const noticias: Noticia[] = JSON.parse(noticiasRaw);
-            res.render("noticias", { noticias });
+            const noticiasObj = JSON.parse(noticiasRaw);
+            const noticias: Noticia[] = noticiasObj.noticias;
+
+            if (Array.isArray(noticias)) {
+                res.render("noticias", { noticias });
+            } else {
+                console.error("Os dados de notícias não são um array:", noticias);
+                res.status(500).send("Erro interno do servidor");
+            }
 
         } catch (error) {
             console.error("Erro ao obter as notícias:", error);
