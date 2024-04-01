@@ -1,37 +1,34 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MVC Exemplo Node.JS</title>
-    <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <div>
-        <br /><br /><br />
-        <h2>MVC Exemplo Node.JS</h2>
-        <br />
-        <% if (noticias.length) { %>
-            <div class="container">
-                <% for(var i=0; i < noticias.length; i++) {%>
-                    <div>
-                        <h4>
-                            <%= noticias[i].id %>
-                        </h4>
-                        <h4>
-                            <%= noticias[i].titulo %>
-                        </h4>
-                        <p>
-                            <%= noticias[i].noticia %>
-                        </p>
+    <div class="container">
+        <br><br><br>
+        <h2 class="text-center">Notícias</h2>
+        <br>
+        <% if (noticias.length > 0) { %>
+            <div class="row">
+                <% noticias.forEach(noticia => { %>
+                    <div class="col-md-6">
+                        <div class="card mb-4 shadow-sm">
+                            <div class="card-body">
+                                <h4 class="card-title"><%= noticia.titulo %></h4>
+                                <p class="card-text"><%= noticia.noticia %></p>
+                            </div>
+                        </div>
                     </div>
-                    <% } %>
+                <% }); %>
             </div>
-            <% } else { %>
-                <p>Nenhuma notícia encontrada.</p>
-                <% } %>
+        <% } else { %>
+            <p class="text-center">Nenhuma notícia encontrada.</p>
+        <% } %>
     </div>
 </body>
 
